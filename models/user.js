@@ -45,7 +45,14 @@ module.exports = (sequelize, DataTypes) => {
             set(value) {
                 throw new Error('Do not try to set the `fullName` value!');
             }
-        }
+        },
+
+        //month-day birthday
+        mdob : {
+            type : DataTypes.STRING,
+            allowNull : false
+        },
+
 
     }, {
         sequelize,

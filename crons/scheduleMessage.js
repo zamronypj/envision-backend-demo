@@ -6,7 +6,7 @@ class scheduleMessageTask {
 
     getUserWithUpcomingBirthday() {
         return User.findAll({ where : {
-            birthDay : {
+            mdob : {
                 [Op.lte]: Date()
             }
         }})
