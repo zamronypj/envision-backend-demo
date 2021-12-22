@@ -18,9 +18,10 @@ Clone this repository and copy configuration in `config/config.json.example`.
 $ git clone https://github.com/zamronypj/envision-backend-demo.git
 $ cd envision-backend-demo
 $ cp config/config.json.example config/config.json
+$ cp config/appconfig.js.example config/appconfig.js
 ```
 
-Edit database connection credentials in `config/config.json` to match your system.
+Edit database connection credentials in `config/config.json` to match your system and also set your [hookbin endpoint](https://hookbin.com).
 
 ### Install dependencies
 
