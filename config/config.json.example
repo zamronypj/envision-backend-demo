@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "change with your own",
+    "password": "change with your own",
+    "database": "change with your own",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "change with your own",
+    "password": "change with your own",
+    "database": "change with your own",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "change with your own",
+    "password": "change with your own",
+    "database": "change with your own",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
