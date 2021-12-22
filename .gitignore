@@ -1,4 +1,5 @@
 config/config.json
+config/appconfig.js
 .vscode
 .env
 node_modules
