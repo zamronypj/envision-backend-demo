@@ -43,4 +43,17 @@ $ npx sequelize-cli db:migrate
 $ npm run start
 ```
 
+## Endpoints
+
+- `GET /users/`, list all users
+- `POST /users/`, create new user
+- `DELETE /users/:id`, delete a user
+- `PUT /users/:id`, update a user
+- `GET /locations/`, list all locations
+- `POST /locations/`, create new location
+- `DELETE /locations/:id`, delete a location
+- `PUT /locations/:id`, update a location
+
 ## Have fun
+
+Have fun tinkering.

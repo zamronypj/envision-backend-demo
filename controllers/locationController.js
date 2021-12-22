@@ -38,7 +38,7 @@ const LocationController = {
 
     createLocation : function (req, res) {
         Location.create({
-            name : req.body.firstName,
+            name : req.body.name,
             timezone : req.body.timezone
         }).then(loc => {
             res.json({
