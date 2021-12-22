@@ -6,7 +6,11 @@ const { Model } = require('sequelize')
 
 module.exports = (sequelize, DataTypes) => {
 
-    class User extends Model {}
+    class User extends Model {
+        static associate(db) {
+            User.hasMany(db.Message);
+        }
+    }
 
     User.init({
         id : {
@@ -32,6 +36,16 @@ module.exports = (sequelize, DataTypes) => {
             type : DataTypes.STRING,
             allowNull : false
         },
+        fullName : {
+            type: DataTypes.VIRTUAL,
+            get() {
+                return this.getDataValue('firstName') + ' ' +
+                    this.getDataValue('lastName');
+            },
+            set(value) {
+                throw new Error('Do not try to set the `fullName` value!');
+            }
+        }
 
     }, {
         sequelize,

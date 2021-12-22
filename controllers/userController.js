@@ -1,6 +1,6 @@
 'use strict'
 
-const { User } = require('../models/index')
+const { sequalize, User, Message, sequelize } = require('../models/index')
 
 const UserController = {
     listUser : (req, res) => {
@@ -11,6 +11,12 @@ const UserController = {
                 message : 'User read ok',
                 data : usr
             })
+        }).catch(err => {
+            res.json({
+                status : 'err',
+                message : err.message,
+                data : null
+            })
         })
     },
 
@@ -20,6 +26,12 @@ const UserController = {
                 status : 'ok',
                 message : 'User read ok',
                 data : usr
+            })
+        }).catch(err => {
+            res.json({
+                status : 'err',
+                message : err.message,
+                data : null
             })
         })
     },
@@ -36,11 +48,17 @@ const UserController = {
                 message : 'User created',
                 data : usr
             })
+        }).catch(err => {
+            res.json({
+                status : 'err',
+                message : err.message,
+                data : null
+            })
         })
     },
 
     deleteUser : function (req, res) {
-        User.destroy({ where : { id : req.params.id }}).then(affectedRow => {
+        User.destroy({where : {id : req.params.id}}).then(affectedRow => {
             if (affectedRow) {
                 return {
                     status : 'ok',
@@ -54,10 +72,8 @@ const UserController = {
                 message : 'Delete failed',
                 data : null
             }
-
         }).then(resp => {
             res.json(resp)
-
         })
     },
 
@@ -72,6 +88,12 @@ const UserController = {
                 status : 'ok',
                 message : 'User updated',
                 data : usr
+            })
+        }).catch(err => {
+            res.json({
+                status : 'err',
+                message : err.message,
+                data : null
             })
         })
     },

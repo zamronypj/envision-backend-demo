@@ -5,7 +5,11 @@ const { Model } = require('sequelize')
 
 module.exports = (sequelize, DataTypes) => {
 
-    class Message extends Model {}
+    class Message extends Model {
+        associate(models) {
+            Message.belongsTo(models.User);
+        }
+    }
 
     Message.init({
         id : {
@@ -14,13 +18,20 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement : true,
             allowNull : false
         },
-        name : {
+        message : {
             type : DataTypes.STRING,
             allowNull : false
         },
-        timezone : {
-            type : DataTypes.STRING,
+        scheduledAt : {
+            type : DataTypes.DATE,
             allowNull : false
+        },
+        userId : {
+            type : DataTypes.INTEGER,
+            allowNull : false,
+            references: { model: 'Users', key: 'id' },
+            onDelete : 'CASCADE',
+            onUpdate : 'CASCADE'
         },
     }, {
         sequelize,
