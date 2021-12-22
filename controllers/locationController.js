@@ -1,16 +1,15 @@
 'use strict'
 
-const { User } = require('../models/index')
-const moment = require('moment');
+const { Location } = require('../models/index')
 
-const UserController = {
-    listUser : (req, res) => {
+const LocationController = {
+    listLocation : (req, res) => {
         //TODO: improve with indices and avoid query all records
-        User.findAll().then(usr => {
+        Location.findAll().then(loc => {
             res.json({
                 status : 'ok',
-                message : 'User read ok',
-                data : usr
+                message : 'Location read ok',
+                data : loc
             })
         }).catch(err => {
             res.json({
@@ -21,12 +20,12 @@ const UserController = {
         })
     },
 
-    getUser : (req, res) => {
-        User.findOne({ where : { id : req.params.id }}).then(usr => {
+    getLocation : (req, res) => {
+        Location.findOne({ where : { name : req.params.name }}).then(loc => {
             res.json({
                 status : 'ok',
-                message : 'User read ok',
-                data : usr
+                message : 'Location read ok',
+                data : loc
             })
         }).catch(err => {
             res.json({
@@ -37,18 +36,15 @@ const UserController = {
         })
     },
 
-    createUser : function (req, res) {
-        User.create({
-            firstName : req.body.firstName,
-            lastName : req.body.lastName,
-            birthDay : req.body.birthDay,
-            location : req.body.location,
-            mdob : moment(req.body.birthDay).format('MM-DD')
-        }).then(usr => {
+    createLocation : function (req, res) {
+        Location.create({
+            name : req.body.firstName,
+            timezone : req.body.timezone
+        }).then(loc => {
             res.json({
                 status : 'ok',
-                message : 'User created',
-                data : usr
+                message : 'Location created',
+                data : loc
             })
         }).catch(err => {
             res.json({
@@ -59,12 +55,12 @@ const UserController = {
         })
     },
 
-    deleteUser : function (req, res) {
-        User.destroy({where : {id : req.params.id}}).then(affectedRow => {
+    deleteLocation : function (req, res) {
+        Location.destroy({where : {name : req.params.name}}).then(affectedRow => {
             if (affectedRow) {
                 return {
                     status : 'ok',
-                    message : 'User deleted',
+                    message : 'Location deleted',
                     data : null
                 }
             }
@@ -79,18 +75,15 @@ const UserController = {
         })
     },
 
-    updateUser : function (req, res) {
-        User.update({
-            firstName : req.body.firstName,
-            lastName : req.body.lastName,
-            birthDay : req.body.birthDay,
-            location : req.body.location,
-            mdob : moment(req.body.birthDay).format('MM-DD')
-        }, { where : { id : req.params.id }}).then(usr => {
+    updateLocation : function (req, res) {
+        Location.update({
+            name : req.body.name,
+            timezone : req.body.timezone
+        }, { where : { name : req.params.name }}).then(loc => {
             res.json({
                 status : 'ok',
-                message : 'User updated',
-                data : usr
+                message : 'Location updated',
+                data : loc
             })
         }).catch(err => {
             res.json({
@@ -103,4 +96,4 @@ const UserController = {
 
 }
 
-module.exports = UserController;
+module.exports = LocationController;

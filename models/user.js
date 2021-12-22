@@ -1,6 +1,5 @@
 'use strict'
 
-//const db = require('../../core/db')
 const { Model } = require('sequelize')
 
 
@@ -9,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     class User extends Model {
         static associate(db) {
             User.hasMany(db.Message);
+            User.belongsTo(db.Location, { foreignKey : 'location'});
         }
     }
 
