@@ -37,10 +37,12 @@ $ npm install
 $ npx sequelize-cli db:migrate
 ```
 
-## Run server
+## Run server and cron
+
+Server and cron is run as two seperate processes.
 
 ```
-$ npm run start
+$ npm run start & npm run cron
 ```
 
 ## Endpoints

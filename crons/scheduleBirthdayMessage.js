@@ -4,7 +4,7 @@ const moment = require('moment');
 const { User, Message } = require('../models/index')
 const birthdayScheduler = require('../services/birthDayScheduler')
 
-class scheduleMessageTask {
+class scheduleBirthdayMessageTask {
 
     getUserWithUpcomingBirthday() {
         return User.findAll({ where : {
@@ -13,19 +13,29 @@ class scheduleMessageTask {
     }
 
     run() {
-        //get all users with upcoming birthday
-        this.getUserWithUpcomingBirthday().then(users => {
-            users.forEach(usr => {
-                Message.create({
-                    message : "Hey " + usr.fullName + " it's your birthday",
-                    scheduledAt : birthdayScheduler.getScheduledAt(usr.birthDay, usr.location.timezone),
-                    userId : usr.id
-                })
-            });
+        //need to store reference to current class instance as
+        //closure will be called inside cron closure
+        const self = this;
+        return () => {
+            //get all users with upcoming birthday
+            self.getUserWithUpcomingBirthday().then(users => {
+                users.forEach(async (usr) => {
+                    const msg = await Message.findOne({where: {userId : usr.id}});
+                    if (!msg) {
+                        Message.create({
+                            message : "Hey " + usr.fullName + " it's your birthday",
+                            scheduledAt : birthdayScheduler.getScheduledAt(usr.birthDay, usr.location.timezone),
+                            userId : usr.id
+                        })
+                    }
+                });
+            }).catch(err => {
+                console.log(err.message)
+            })
+        }
 
-        })
     }
 
 }
 
-module.exports = new scheduleMessageTask()
+module.exports = new scheduleBirthdayMessageTask()

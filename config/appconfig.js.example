@@ -1,6 +1,6 @@
 'use strict'
 
-export default {
+module.exports = {
     thirdParty : {
         hookbin : {
             url : "your hookbin url endpoint"
