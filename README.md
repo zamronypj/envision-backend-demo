@@ -1,6 +1,25 @@
 # Digital Envision API demo test
 
-This is repository for demo application for sending scheduled message to users
+This is repository for demo application for sending scheduled message to users.
+
+It is consist of cron and RESET server application.
+
+Cron application does following:
+
+- Every day, a task runs to find users having upcoming birthdays.
+For each users having upcoming birthday, message reminder is created. and scheduled at
+date of birthday relative to server time is calculated from user birthday at
+9AM of user local timezone. Message is stored in database (if there is already pending message, it does nothing).
+
+- Every hour, another task runs to process any due pending message and send message to user.
+For this purpose, it just send request to a hookbin endpoint. Any sent messages
+are then remove from database.
+
+REST server does folowing:
+
+- User CRUD operation
+- Location and timezone CRUD operation
+- Message CRUD operation (in case need for sending different message)
 
 ## Requirement
 
@@ -39,7 +58,7 @@ $ npx sequelize-cli db:migrate
 
 ## Run server and cron
 
-Server and cron is run as two seperate processes.
+Server and cron is run as two separate processes.
 
 ```
 $ npm run start & npm run cron
