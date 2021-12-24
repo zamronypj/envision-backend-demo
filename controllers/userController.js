@@ -37,7 +37,7 @@ const UserController = {
         })
     },
 
-    createUser : function (req, res) {
+    createUser : (req, res) => {
         User.create({
             firstName : req.body.firstName,
             lastName : req.body.lastName,
@@ -59,7 +59,7 @@ const UserController = {
         })
     },
 
-    deleteUser : function (req, res) {
+    deleteUser : (req, res) => {
         User.destroy({where : {id : req.params.id}}).then(affectedRow => {
             if (affectedRow) {
                 return {
@@ -79,7 +79,7 @@ const UserController = {
         })
     },
 
-    updateUser : function (req, res) {
+    updateUser : (req, res) => {
         User.update({
             firstName : req.body.firstName,
             lastName : req.body.lastName,

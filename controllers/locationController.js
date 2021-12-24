@@ -36,7 +36,7 @@ const LocationController = {
         })
     },
 
-    createLocation : function (req, res) {
+    createLocation : (req, res) => {
         Location.create({
             name : req.body.name,
             timezone : req.body.timezone
@@ -55,7 +55,7 @@ const LocationController = {
         })
     },
 
-    deleteLocation : function (req, res) {
+    deleteLocation : (req, res) => {
         Location.destroy({where : {name : req.params.name}}).then(affectedRow => {
             if (affectedRow) {
                 return {
@@ -75,7 +75,7 @@ const LocationController = {
         })
     },
 
-    updateLocation : function (req, res) {
+    updateLocation : (req, res) => {
         Location.update({
             name : req.body.name,
             timezone : req.body.timezone

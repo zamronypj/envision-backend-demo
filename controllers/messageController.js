@@ -36,7 +36,7 @@ const MessageController = {
         })
     },
 
-    createMessage : function (req, res) {
+    createMessage : (req, res) => {
         Message.create({
             message : req.body.message,
             scheduledAt : req.body.scheduledAt,
@@ -56,7 +56,7 @@ const MessageController = {
         })
     },
 
-    deleteMessage : function (req, res) {
+    deleteMessage : (req, res) => {
         Message.destroy({where : {id : req.params.id}}).then(affectedRow => {
             if (affectedRow) {
                 return {
@@ -76,7 +76,7 @@ const MessageController = {
         })
     },
 
-    updateMessage : function (req, res) {
+    updateMessage : (req, res) => {
         Message.update({
             message : req.body.message,
             scheduledAt : req.body.scheduledAt,
