@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "envision",
+    "password": "envision",
+    "database": "envision",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "envision",
+    "password": "envision",
+    "database": "envision",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "envision",
+    "password": "envision",
+    "database": "envision",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
