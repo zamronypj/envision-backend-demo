@@ -7,13 +7,9 @@ It is consist of cron and RESET server application.
 Cron application does following:
 
 - Every day, a task runs to find users having upcoming birthdays.
-For each users having upcoming birthday, message reminder is created. and scheduled at
-date of birthday relative to server time is calculated from user birthday at
-9AM of user local timezone. Message is stored in database (if there is already pending message, it does nothing).
+For each users having upcoming birthday, message reminder is created and scheduled at date of birthday at 9 AM of user local timezone. Internally message scheduled time data is stored relative to server time. Message is stored in database only if there is no already pending message, i.e, by checking if target user id is matched.
 
-- Every hour, another task runs to process any due pending message and send message to user.
-For this purpose, it just send request to a hookbin endpoint. Any sent messages
-are then remove from database.
+- Every hour, another task runs to process any due pending message and send message to user. For this purpose, it just send request to a hookbin endpoint. Any sent messages are then remove from database.
 
 REST server does folowing:
 

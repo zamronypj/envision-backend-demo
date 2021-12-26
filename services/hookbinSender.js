@@ -3,6 +3,9 @@
 const axios = require('axios')
 const appCfg = require('../config/appconfig')
 
+/**
+ * Class responsible to send message by invoking hookbin endpoint.
+ */
 class HookbinSender {
 
     constructor(url){
