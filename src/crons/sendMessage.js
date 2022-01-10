@@ -22,24 +22,12 @@ class sendMessageTask {
         return () => {
             //get all messages scheduled current or past
             self.getDueReminder().then(msgs => {
-                let sentMsgIds = [];
-                let sendPromises = []
                 msgs.forEach(msg => {
-                    sendPromises.push(
-                        senderMsg.send(msg).then(() => {
-                            //collect all sent msg id
-                            sentMsgIds.push(msg.id);
-                        })
-                    );
+                    senderMsg.send(msg).then(() => {
+                        //remove message when successfuly sent
+                        Message.destroy({where : {id : msg.id }})
+                    });
                 });
-
-                if (sendPromises.length) {
-                    //wait until all sendPromises complete
-                    Promise.all(sendPromises).then(()=>{
-                        //remove reminder msg that is successfully sent
-                        Message.destroy({where : {id : sentMsgIds }});
-                    })
-                }
             })
         }
     }
